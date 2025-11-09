@@ -54,6 +54,7 @@
     "react-use": "^15.3.4",
     "request": "^2.34",
     "request-promise": "^4.2.5",
+    "serve": "^14.2.5",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
     "superagent": "^5.0.2",
@@ -101,7 +102,7 @@
     "devbackendprod": "source .env.prod; PORT=3021 nodemon --watch server -e \"ts\" --exec \"npx ts-node -P server/tsconfig.json server/server.ts\"",
     "servebackendprod": "while true; do env $(cat .env.prod | xargs)  NODE_ENV=production PORT=3021 ts-node -P server/tsconfig.json server/server.ts || true; done",
     "servebackendstaging": "while true; do env $(cat .env.staging | xargs)  NODE_ENV=production PORT=4021 ts-node -P server/tsconfig.json server/server.ts || true; done",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "build": "NODE_OPTIONS='--max-old-space-size=9000 --openssl-legacy-provider' react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

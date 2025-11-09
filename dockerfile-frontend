@@ -4,8 +4,11 @@ WORKDIR /app
 
 COPY ./ .
 
+ENV REACT_APP_API_URL='192.168.55.111:3021'
+RUN yarn add serve
 RUN yarn install
+RUN yarn build
 
 EXPOSE 3020
 
-CMD ["yarn", "devfrontend"]
+CMD ["npx", "serve", "-s", "build", "-l", "3020"]

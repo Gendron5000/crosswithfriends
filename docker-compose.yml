@@ -8,6 +8,8 @@ services:
       - "3020:3020"
     depends_on:
       - backend
+    environment:
+      REACT_APP_API_URL: '192.168.55.111:3021'
     stdin_open: true
     tty: true
 
@@ -22,7 +24,8 @@ services:
       PGDATABASE: dfac
       PGUSER: postgres
       PGPASSWORD: admin
-      PGHOST: db
+      PGHOST: 192.168.55.111
+      PGPORT: 5437
     depends_on:
       - db
 
@@ -30,13 +33,11 @@ services:
     image: postgres:16-alpine
     restart: always
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - /mnt/second/docker/crosswithfriends/pgdata/:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: dfac
     ports:
-      - "5432:5432"
+      - "5437:5432"
 
-volumes:
-  pgdata:
